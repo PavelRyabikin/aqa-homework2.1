@@ -15,6 +15,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class DebitCardFormTest {
@@ -51,5 +52,6 @@ public class DebitCardFormTest {
         wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector(".button_view_extra"))).click();
         WebElement result = wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector(".Success_successBlock__2L3Cw")));
         assertTrue(result.isDisplayed());
+        assertEquals("Ваша заявка успешно отправлена! Наш менеджер свяжется с вами в ближайшее время.", result.getText().trim());
     }
 }
