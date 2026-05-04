@@ -46,7 +46,6 @@ public class DebitCardFormTest {
 
     @Test
     void shouldFormTestV1() {
-        WebElement form = wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector("[data-test-id]")));
         wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector("[data-test-id=name] input"))).sendKeys("Иванов Иван");
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("[data-test-id=phone] input"))).sendKeys("+79270000000");
         wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector("[data-test-id=agreement]"))).click();
@@ -58,7 +57,6 @@ public class DebitCardFormTest {
 
     @Test
     void shouldShowErrorForInvalidName() {
-        WebElement form = wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector("[data-test-id]")));
         wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector("[data-test-id=name] input"))).sendKeys("Ivanov Ivan");
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("[data-test-id=phone] input"))).sendKeys("+79270000000");
         wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector("[data-test-id=agreement]"))).click();
@@ -70,7 +68,6 @@ public class DebitCardFormTest {
 
     @Test
     void shouldShowErrorForEmptyName() {
-        WebElement form = wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector("[data-test-id]")));
         wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector("[data-test-id=name] input"))).sendKeys("");
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("[data-test-id=phone] input"))).sendKeys("+79270000000");
         wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector("[data-test-id=agreement]"))).click();
@@ -82,7 +79,6 @@ public class DebitCardFormTest {
 
     @Test
     void shouldShowErrorForInvalidPhone() {
-        WebElement form = wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector("[data-test-id]")));
         wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector("[data-test-id=name] input"))).sendKeys("Иванов Иван");
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("[data-test-id=phone] input"))).sendKeys("00000");
         wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector("[data-test-id=agreement]"))).click();
@@ -94,7 +90,6 @@ public class DebitCardFormTest {
 
     @Test
     void shouldShowErrorForEmptyPhone() {
-        WebElement form = wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector("[data-test-id]")));
         wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector("[data-test-id=name] input"))).sendKeys("Иванов Иван");
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("[data-test-id=phone] input"))).sendKeys("");
         wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector("[data-test-id=agreement]"))).click();
@@ -106,7 +101,6 @@ public class DebitCardFormTest {
 
     @Test
     void shouldShowErrorForUncheckedAgreement() {
-        WebElement form = wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector("[data-test-id]")));
         wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector("[data-test-id=name] input"))).sendKeys("Иванов Иван");
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("[data-test-id=phone] input"))).sendKeys("+79270000000");
         wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector(".button_view_extra"))).click();
