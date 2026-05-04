@@ -54,4 +54,68 @@ public class DebitCardFormTest {
         assertTrue(result.isDisplayed());
         assertEquals("Ваша заявка успешно отправлена! Наш менеджер свяжется с вами в ближайшее время.", result.getText().trim());
     }
+
+    @Test
+    void shouldShowErrorForInvalidName() {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
+        WebElement form = wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector("[data-test-id]")));
+        wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector("[data-test-id=name] input"))).sendKeys("Ivanov Ivan");
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("[data-test-id=phone] input"))).sendKeys("+79270000000");
+        wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector("[data-test-id=agreement]"))).click();
+        wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector(".button_view_extra"))).click();
+        WebElement result = wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector("[data-test-id=name].input_invalid .input__sub")));
+        assertTrue(result.isDisplayed());
+        assertEquals("Имя и Фамилия указаные неверно. Допустимы только русские буквы, пробелы и дефисы.", result.getText().trim());
+    }
+
+    @Test
+    void shouldShowErrorForEmptyName() {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
+        WebElement form = wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector("[data-test-id]")));
+        wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector("[data-test-id=name] input"))).sendKeys("");
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("[data-test-id=phone] input"))).sendKeys("+79270000000");
+        wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector("[data-test-id=agreement]"))).click();
+        wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector(".button_view_extra"))).click();
+        WebElement result = wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector("[data-test-id=name].input_invalid .input__sub")));
+        assertTrue(result.isDisplayed());
+        assertEquals("Поле обязательно для заполнения", result.getText().trim());
+    }
+
+    @Test
+    void shouldShowErrorForInvalidPhone() {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
+        WebElement form = wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector("[data-test-id]")));
+        wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector("[data-test-id=name] input"))).sendKeys("Иванов Иван");
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("[data-test-id=phone] input"))).sendKeys("00000");
+        wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector("[data-test-id=agreement]"))).click();
+        wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector(".button_view_extra"))).click();
+        WebElement result = wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector("[data-test-id=phone].input_invalid .input__sub")));
+        assertTrue(result.isDisplayed());
+        assertEquals("Телефон указан неверно. Должно быть 11 цифр, например, +79012345678.", result.getText().trim());
+    }
+
+    @Test
+    void shouldShowErrorForEmptyPhone() {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
+        WebElement form = wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector("[data-test-id]")));
+        wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector("[data-test-id=name] input"))).sendKeys("Иванов Иван");
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("[data-test-id=phone] input"))).sendKeys("");
+        wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector("[data-test-id=agreement]"))).click();
+        wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector(".button_view_extra"))).click();
+        WebElement result = wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector("[data-test-id=phone].input_invalid .input__sub")));
+        assertTrue(result.isDisplayed());
+        assertEquals("Поле обязательно для заполнения", result.getText().trim());
+    }
+
+    @Test
+    void shouldShowErrorForUncheckedAgreement() {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
+        WebElement form = wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector("[data-test-id]")));
+        wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector("[data-test-id=name] input"))).sendKeys("Иванов Иван");
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("[data-test-id=phone] input"))).sendKeys("+79270000000");
+        wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector(".button_view_extra"))).click();
+        WebElement result = wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector("[data-test-id=agreement].input_invalid")));
+        assertTrue(result.isDisplayed());
+        assertEquals("Я соглашаюсь с условиями обработки и использования моих персональных данных и разрешаю сделать запрос в бюро кредитных историй", result.getText().trim());
+    }
 }
